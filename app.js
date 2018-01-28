@@ -22,7 +22,7 @@ code for the first one.)
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, lastRolled;
 
 init();
 
@@ -36,9 +36,24 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png';
 
+    checkForDoubleSixRolled(dice, lastRolled);
+    lastRolled = dice;
+
     updateRoundScore(dice);
   }
 });
+
+function checkForDoubleSixRolled(dice, lastRolled) {
+  if (dice && lastRolled === 6) { // bug when player rolls a 6 and then a 5.
+    roundScore = 0;
+    scores[activePlayer] = 0;
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    console.log('Double Sixes!');
+    console.log('Dice: ' + dice);
+    console.log('last: ' + lastRolled);
+    nextPlayer();
+  }
+}
 
 function updateRoundScore(dice) {
   //3. Update the round score IF the rolled number was not 1
