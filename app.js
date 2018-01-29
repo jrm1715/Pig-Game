@@ -96,6 +96,7 @@ function endOfGame() {
 function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0;
+  lastRolled = 0;
 
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
@@ -113,6 +114,7 @@ function init() {
   activePlayer = 0;
   roundScore = 0;
   gamePlaying = true;
+  lastRolled = 0;
 
   document.querySelector('.dice').style.display = 'none';
 
