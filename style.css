@@ -150,12 +150,20 @@ i {
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
-input {
+.score-input {
   position: absolute;
-  left:43%;
-  top: 350px;
+  right:39%;
+  top: 328px;
   height: 25px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.max-score-field {
+  position: relative;
   border: 1px solid #ccc;
+  height: 25px;
+  width: 100px;
 }
 
 input::placeholder {

@@ -78,7 +78,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 });
 
 function endOfGame() {
-  if(scores[activePlayer] >= 100){
+  let maxScore = document.getElementById('max-score').value;
+  if(scores[activePlayer] >= maxScore){
     document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
