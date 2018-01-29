@@ -44,7 +44,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 });
 
 function checkForDoubleSixRolled(dice, lastRolled) {
-  if (dice && lastRolled === 6) { // bug when player rolls a 6 and then a 5.
+  if (dice === 6 && lastRolled === 6) { // bug when player rolls a 6 and then a 5.
     roundScore = 0;
     scores[activePlayer] = 0;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
@@ -81,7 +81,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 });
 
 function endOfGame() {
-  if(scores[activePlayer] >= 20){
+  if(scores[activePlayer] >= 100){
     document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
