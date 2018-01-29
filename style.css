@@ -6,7 +6,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
 
 .clearfix::after {
@@ -80,7 +80,7 @@ body {
     color: #EB4D4D;
     top: -7px;
     right: 10px;
-    
+
 }
 
 .player-current-box {
@@ -148,6 +148,18 @@ i {
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+
+input {
+  position: absolute;
+  left:43%;
+  top: 350px;
+  height: 25px;
+  border: 1px solid #ccc;
+}
+
+input::placeholder {
+  text-align: center;
 }
 
 .winner { background-color: #f7f7f7; }

@@ -36,21 +36,18 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png';
 
-    checkForDoubleSixRolled(dice, lastRolled);
+    checkIfDoubleSixesRolled(dice, lastRolled);
     lastRolled = dice;
 
     updateRoundScore(dice);
   }
 });
 
-function checkForDoubleSixRolled(dice, lastRolled) {
-  if (dice === 6 && lastRolled === 6) { // bug when player rolls a 6 and then a 5.
+function checkIfDoubleSixesRolled(dice, lastRolled) {
+  if (dice === 6 && lastRolled === 6) {
     roundScore = 0;
     scores[activePlayer] = 0;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-    console.log('Double Sixes!');
-    console.log('Dice: ' + dice);
-    console.log('last: ' + lastRolled);
     nextPlayer();
   }
 }
