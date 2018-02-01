@@ -24,12 +24,13 @@ code for the first one.)
 
 /*
   TODO:
-  - Update functions accordingly. Identified by block comments with 'TODO'.
-  - Create a function called 'hideDice' to tidy up code by DRY standards.
+  - Add a timer function. When the player's turn starts. The timer starts until
+    their turn has ended (i.e. the player hits HOLD or rolles two 1's or 6's).
+  - Create a function called 'hideDice' to tidy up code using DRY standards.
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying, lastRolled;
+let scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -45,17 +46,13 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
     document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
 
-    checkIfDoubleSixesRolled(dice1, lastRolled);
-    lastRolled = dice1; // TODO create second variable for second dice. Array???
-
-    updateRoundScore(dice1);
+    checkIfDoubleSixesRolled(dice1, dice2);
+    updateRoundScore(dice1, dice2);
   }
 });
 
-
-//TODO Update function to include second dice.
-function checkIfDoubleSixesRolled(dice, lastRolled) {
-  if (dice === 6 && lastRolled === 6) {
+function checkIfDoubleSixesRolled(dice1, dice2) {
+  if (dice1 === 6 && dice2 === 6) {
     roundScore = 0;
     scores[activePlayer] = 0;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
@@ -63,12 +60,11 @@ function checkIfDoubleSixesRolled(dice, lastRolled) {
   }
 }
 
-// TODO: Update this function to include the second dice.
-function updateRoundScore(dice) {
+function updateRoundScore(dice1, dice2) {
   //3. Update the round score IF the rolled number was not 1
-  if (dice !== 1) {
+  if (dice1 !== 1 || dice2 !== 1) {
     //Add score
-    roundScore += dice;
+    roundScore += dice1 + dice2;
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
   } else {
     //Next player
@@ -76,7 +72,7 @@ function updateRoundScore(dice) {
   }
 }
 
-//TODO Update function to include second dice in calculated player score.
+
 document.querySelector('.btn-hold').addEventListener('click', function() {
   if(gamePlaying){
     // Add CURRENT score to GLOBAL score
@@ -108,7 +104,7 @@ function endOfGame() {
 function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0;
-  lastRolled = 0;
+  lastRolledDice = 0;
 
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
@@ -127,7 +123,7 @@ function init() {
   activePlayer = 0;
   roundScore = 0;
   gamePlaying = true;
-  lastRolled = 0;
+  lastRolledDice = 0;
 
   document.getElementById('dice-1').style.display = 'none';
   document.getElementById('dice-2').style.display = 'none';
